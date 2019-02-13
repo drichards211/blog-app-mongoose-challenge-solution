@@ -69,5 +69,22 @@ describe('Blogs API resource', function() {
     return closeServer();
   });
 
+  describe('GET endpoint', function() {
+    it('should return all existing blog posts', function() {
+      let response;
+      return chai.request(app)
+        .get('/posts')
+        .then(function(r) {
+          response = r;
+          expect(response).to.have.status(200);
+          expect(response.body.posts).to.have.lengthOf.at.least(1);
+          return BlogPost.count();
+        })
+        .then(function(count) {
+          expect(response.body.posts).to.have.lengthOf(count);
+        });
+    });
+  });
+
 })
 
