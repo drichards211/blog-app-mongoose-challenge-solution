@@ -14,24 +14,36 @@ const {TEST_DATABASE_URL} = require('../config');
 chai.use(chaiHttp);
 
 function seedBlogData() {
-
+  console.info('seeding blog data');
+  const seedData = [];
+  for (let i = 1; i <= 10; i++) {
+    seedData.push(generateBlogData());
+  }
+  return BlogPost.insertMany(seedData);
 }
 
 function generateAuthorName() {
-
+  const author = {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName()
+  }
+  return author;
 }
 
-
 function generateTitle() {
-
+  return faker.lorem.sentence()
 }
 
 function generateContent() {
-
+  return faker.lorem.text();
 }
 
 function generateBlogData() {
-
+  return {
+    author: generateAuthorName(),
+    title: generateTitle(),
+  content: generateContent()
+  }
 }
 
 function tearDownDb() {
