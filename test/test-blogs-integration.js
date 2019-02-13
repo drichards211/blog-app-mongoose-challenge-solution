@@ -77,11 +77,11 @@ describe('Blogs API resource', function() {
         .then(function(r) {
           response = r;
           expect(response).to.have.status(200);
-          expect(response.body.posts).to.have.lengthOf.at.least(1);
+          expect(response.body).to.have.lengthOf.at.least(1);
           return BlogPost.count();
         })
         .then(function(count) {
-          expect(response.body.posts).to.have.lengthOf(count);
+          expect(response.body).to.have.lengthOf(count);
         });
     });
   });
