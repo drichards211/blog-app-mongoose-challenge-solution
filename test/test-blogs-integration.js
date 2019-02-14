@@ -107,8 +107,36 @@ describe('Blogs API resource', function() {
         expect(singlePost.title).to.equal(post.title);
         expect(singlePost.content).to.equal(post.content);
         expect(singlePost.author).to.equal(post.authorName);
-      })
-    })
+      });
+    });
+  });
+
+  describe('POST endpoint', function() {
+    it('should add a new blog post', function() {
+      const newPost = generateBlogData();
+
+      return chai.request(app)
+        .post('/posts')
+        .send(newPost)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'id', 'created', 'author', 'title', 'content');
+          expect(res.body.title).to.equal(newPost.title);
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.author).to.equal(`${newPost.author.firstName} ${newPost.author.lastName}`);
+          expect(res.body.content).to.equal(newPost.content);
+          return BlogPost.findById(res.body.id);
+        })
+        .then(function(post) {
+          expect(post.title).to.equal(newPost.title);
+          expect(post.content).to.equal(newPost.content);
+          expect(post.author.firstName).to.equal(newPost.author.firstName);
+          expect(post.author.lastName).to.equal(newPost.author.lastName);
+        });
+    });
   });
 
 })
