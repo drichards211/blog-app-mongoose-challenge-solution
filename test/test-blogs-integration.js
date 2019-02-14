@@ -139,5 +139,35 @@ describe('Blogs API resource', function() {
     });
   });
 
+  describe('PUT endpoint', function() {
+    it('should update fields', function() {
+      const updateData = {
+        title: "Potatoes are awesome",
+        content: "French fries and potato chips taste amazing!",
+        author: {
+          firstName: "Spuds",
+          lastName: "MacKenzie"
+        }
+      };
+      return BlogPost
+      .findOne()
+      .then(function(post) {
+        updateData.id = post.id;
+        return chai.request(app)
+          .put(`/posts/${post.id}`)
+          .send(updateData);
+      })
+      .then(function(res) {
+        expect(res).to.have.status(204);
+        return BlogPost.findById(updateData.id);
+      })
+      .then(function(post) {
+        expect(post.title).to.equal(updateData.title);
+        expect(post.content).to.equal(updateData.content);
+        expect(post.author.firstName).to.equal(updateData.author.firstName);
+        expect(post.author.lastName).to.equal(updateData.author.lastName);
+      })
+    })
+  })
 })
 
