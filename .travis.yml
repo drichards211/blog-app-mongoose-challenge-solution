@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: QzuquspXzpwuRZ2V0EX/jZJEIuoA4bat2j7Puj4KWA6dpObQafUD4mJHVRMYiaM/MshiBXG7W/hWKAPfKM/i7PeujOREDoDlUI4hJvmVDMOF5Y7AdvOLoAZFLuJ6gx45DSp9Mi0Bj+4znlTC5coVF0zg941jjvlWZ6nBi7AhS7YwQWCLjy1KX38ApcFAiF9CgIFsJucuW9PX+lcJWZmTVwSI0dyOk94tLuLxi26wm3kxghQX26kCRFN4tnAypI+hRPRI+rsTCaLK5p6yrTKMPsSZa0aUguncrPW3PRmXNWxHo6hktgs0C6K5upDYpwCfCDSLbLHhsvzmbbqz3VfvVCUwGeODSZ96WT5LRk99lcJYOEUNpdzwaY2i+LEiSkrbh630qsMfpVuWswbKPWVuOMVz0hboRDgWdfYvKSFdvR+OHgDCGYygJut0a3Ahg3Ht4FfFfh8ylW0V0g1wELFKsE/O1DcFGAahrc+nSrFbvysu4Dz2BWq9nSob3fBySzkighjxQFIUP2DYVB5Wa3ghq6oH9gR+RPiFITD0cPo+Q5kq338MWj8ZkYC2nJi3FXC4TgW3kfX/Z2ejmv+mkNB4HP8eaF+wd5C+wEaCIVhzJ8mynGb46IFaOzeeQIw4Cq4swtzWijvsS4Bz9ouypxNP3m1ywZwI95yc50nevp0J6Ro=
+  app: aqueous-beyond-17325
+  on:
+    repo: drichards211/blog-app-mongoose-challenge-solution
